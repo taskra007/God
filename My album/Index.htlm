@@ -1,29 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Photo Album</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Modern Website</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>📸 My Photo Album</h1>
+    <!-- Header -->
+    <header>
+        <h1>My Website</h1>
+        <p>Clean • Simple • Modern</p>
+    </header>
 
-    <div class="gallery">
-        <img src="images/photo1.jpg" alt="Photo 1">
-        <img src="images/photo2.jpg" alt="Photo 2">
-        <img src="images/photo3.jpg" alt="Photo 3">
-        <img src="images/photo4.jpg" alt="Photo 4">
-        <img src="images/photo5.jpg" alt="Photo 5">
-    </div>
+    <!-- Navigation -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Gallery</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
 
-    <!-- Lightbox Modal -->
-    <div id="modal" class="modal">
-        <span id="closeBtn">&times;</span>
-        <img class="modal-content" id="modalImg">
-    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Welcome to My Modern Website</h2>
+        <p>A beautiful and responsive layout built with HTML & CSS</p>
+        <a class="btn" href="#gallery">View My Photos</a>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- Gallery -->
+    <section id="gallery" class="gallery">
+        <h2>My Photo Album</h2>
+
+        <div class="grid">
+            <img src="images/photo1.jpg" alt="">
+            <img src="images/photo2.jpg" alt="">
+            <img src="images/photo3.jpg" alt="">
+            <img src="images/photo4.jpg" alt="">
+            <img src="images/photo5.jpg" alt="">
+            <img src="images/photo6.jpg" alt="">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 My Website | Designed with ❤️</p>
+    </footer>
+
 </body>
 </html>
