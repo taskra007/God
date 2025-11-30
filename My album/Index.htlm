@@ -1,52 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Modern Website</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Website — Dark Theme</title>
+
+  <!-- Google font (optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="page-shell">
 
-    <!-- Header -->
-    <header>
-        <h1>My Website</h1>
-        <p>Clean • Simple • Modern</p>
+    <!-- Header / Nav -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">My Website</div>
+        <nav class="nav">
+          <a href="#home">Home</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
     </header>
 
-    <!-- Navigation -->
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Gallery</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </nav>
+    <!-- Hero -->
+    <main id="home">
+      <section class="hero">
+        <h1>Welcome to<br><span class="accent">My Modern Website</span></h1>
+        <p class="lead">A beautiful, responsive dark layout built with HTML, CSS & JavaScript</p>
+        <a class="cta" href="#gallery">View My Photos</a>
+      </section>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h2>Welcome to My Modern Website</h2>
-        <p>A beautiful and responsive layout built with HTML & CSS</p>
-        <a class="btn" href="#gallery">View My Photos</a>
-    </section>
+      <!-- Gallery -->
+      <section id="gallery" class="gallery-section">
+        <h2 class="section-title">My Photo Album</h2>
 
-    <!-- Gallery -->
-    <section id="gallery" class="gallery">
-        <h2>My Photo Album</h2>
-
-        <div class="grid">
-            <img src="images/photo1.jpg" alt="">
-            <img src="images/photo2.jpg" alt="">
-            <img src="images/photo3.jpg" alt="">
-            <img src="images/photo4.jpg" alt="">
-            <img src="images/photo5.jpg" alt="">
-            <img src="images/photo6.jpg" alt="">
+        <div class="grid" id="galleryGrid">
+          <!-- Put your images here (example shown) -->
+          <!-- Important: use correct path and case-sensitive filenames on GitHub Pages -->
+          <figure class="photo">
+            <img data-src="images/photo1.jpg" alt="Photo 1" loading="lazy">
+          </figure>
+          <figure class="photo">
+            <img data-src="images/photo2.jpg" alt="Photo 2" loading="lazy">
+          </figure>
+          <figure class="photo">
+            <img data-src="images/photo3.jpg" alt="Photo 3" loading="lazy">
+          </figure>
+          <figure class="photo">
+            <img data-src="images/photo4.jpg" alt="Photo 4" loading="lazy">
+          </figure>
+          <figure class="photo">
+            <img data-src="images/photo5.jpg" alt="Photo 5" loading="lazy">
+          </figure>
+          <figure class="photo">
+            <img data-src="images/photo6.jpg" alt="Photo 6" loading="lazy">
+          </figure>
         </div>
-    </section>
+      </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 My Website | Designed with ❤️</p>
-    </footer>
+      <!-- Footer -->
+      <footer class="site-footer">
+        <p>© <span id="year"></span> My Website | Designed with ❤️</p>
+      </footer>
+    </main>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+      <button class="lb-close" aria-label="Close">&times;</button>
+      <button class="lb-prev" aria-label="Previous">◀</button>
+      <img class="lb-image" alt="">
+      <button class="lb-next" aria-label="Next">▶</button>
+      <div class="lb-caption" aria-live="polite"></div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
