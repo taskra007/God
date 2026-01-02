@@ -2,49 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Playable Level Game</title>
+<title>Playable Level Map</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: url("background.jpg") no-repeat center center fixed;
+}
+
+/* BACKGROUND CONTAINER */
+.game-map {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: url("background.jpg") no-repeat center center;
     background-size: cover;
 }
 
-/* LEVEL BUTTONS (Invisible but clickable) */
+/* LEVEL BUTTONS */
 .level {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     cursor: pointer;
+    z-index: 5;
+    background: rgba(255,0,0,0.25); /* TEMP: shows clickable area */
 }
 
-/* Example positions – adjust as needed */
-#level1 { top: 70%; left: 45%; }
-#level2 { top: 65%; left: 50%; }
-#level3 { top: 60%; left: 47%; }
-#level4 { top: 55%; left: 52%; }
-#level5 { top: 50%; left: 48%; }
-#level6 { top: 45%; left: 53%; }
-#level7 { top: 40%; left: 48%; }
-#level8 { top: 35%; left: 52%; }
-#level9 { top: 30%; left: 50%; }
+/* LEVEL POSITIONS (ADJUST AS NEEDED) */
+#level1 { top: 78%; left: 46%; }
+#level2 { top: 73%; left: 50%; }
+#level3 { top: 68%; left: 47%; }
+#level4 { top: 63%; left: 52%; }
+#level5 { top: 58%; left: 48%; }
+#level6 { top: 53%; left: 52%; }
+#level7 { top: 48%; left: 48%; }
+#level8 { top: 43%; left: 52%; }
+#level9 { top: 38%; left: 50%; }
 
 /* QUIZ POPUP */
 .popup {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.7);
     justify-content: center;
     align-items: center;
+    z-index: 10;
 }
 
 .quiz-box {
     background: white;
-    width: 300px;
+    width: 320px;
     padding: 20px;
     border-radius: 12px;
     text-align: center;
@@ -53,7 +63,7 @@ body {
 .option {
     background: #4caf50;
     color: white;
-    padding: 8px;
+    padding: 10px;
     margin: 8px 0;
     border-radius: 8px;
     cursor: pointer;
@@ -64,11 +74,11 @@ body {
 }
 
 .close {
-    margin-top: 10px;
     background: #e74c3c;
     color: white;
-    padding: 6px;
-    border-radius: 6px;
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 8px;
     cursor: pointer;
 }
 </style>
@@ -76,21 +86,26 @@ body {
 
 <body>
 
-<!-- CLICKABLE LEVELS -->
-<div id="level1" class="level" onclick="openQuiz(1)"></div>
-<div id="level2" class="level" onclick="openQuiz(2)"></div>
-<div id="level3" class="level" onclick="openQuiz(3)"></div>
-<div id="level4" class="level" onclick="openQuiz(4)"></div>
-<div id="level5" class="level" onclick="openQuiz(5)"></div>
-<div id="level6" class="level" onclick="openQuiz(6)"></div>
-<div id="level7" class="level" onclick="openQuiz(7)"></div>
-<div id="level8" class="level" onclick="openQuiz(8)"></div>
-<div id="level9" class="level" onclick="openQuiz(9)"></div>
+<!-- MAP -->
+<div class="game-map">
+
+    <!-- CLICKABLE LEVELS -->
+    <div class="level" id="level1" onclick="openQuiz(1)"></div>
+    <div class="level" id="level2" onclick="openQuiz(2)"></div>
+    <div class="level" id="level3" onclick="openQuiz(3)"></div>
+    <div class="level" id="level4" onclick="openQuiz(4)"></div>
+    <div class="level" id="level5" onclick="openQuiz(5)"></div>
+    <div class="level" id="level6" onclick="openQuiz(6)"></div>
+    <div class="level" id="level7" onclick="openQuiz(7)"></div>
+    <div class="level" id="level8" onclick="openQuiz(8)"></div>
+    <div class="level" id="level9" onclick="openQuiz(9)"></div>
+
+</div>
 
 <!-- QUIZ POPUP -->
 <div class="popup" id="popup">
     <div class="quiz-box">
-        <h3 id="question">Question</h3>
+        <h3 id="question"></h3>
         <div id="options"></div>
         <div class="close" onclick="closeQuiz()">Close</div>
     </div>
@@ -98,51 +113,35 @@ body {
 
 <script>
 const questions = {
-    1: {
-        q: "What is 2 + 2?",
-        options: ["3", "4", "5"],
-        answer: "4"
-    },
-    2: {
-        q: "HTML stands for?",
-        options: ["Hyper Text Markup Language", "High Text Machine", "Home Tool Markup"],
-        answer: "Hyper Text Markup Language"
-    },
-    3: {
-        q: "Which is a programming language?",
-        options: ["HTML", "CSS", "JavaScript"],
-        answer: "JavaScript"
-    }
+    1: { q: "2 + 2 = ?", options: ["3","4","5"], answer: "4" },
+    2: { q: "HTML is?", options: ["Language","Browser","OS"], answer: "Language" },
+    3: { q: "JS used for?", options: ["Style","Logic","Design"], answer: "Logic" }
 };
 
 function openQuiz(level) {
-    const quiz = questions[level];
-    if (!quiz) {
-        alert("Level locked or no question yet!");
+    const q = questions[level];
+    if (!q) {
+        alert("🔒 Level Locked");
         return;
     }
 
-    document.getElementById("question").innerText = quiz.q;
-    const optionsDiv = document.getElementById("options");
-    optionsDiv.innerHTML = "";
+    document.getElementById("question").innerText = q.q;
+    const optBox = document.getElementById("options");
+    optBox.innerHTML = "";
 
-    quiz.options.forEach(opt => {
-        const div = document.createElement("div");
-        div.className = "option";
-        div.innerText = opt;
-        div.onclick = () => checkAnswer(opt, quiz.answer);
-        optionsDiv.appendChild(div);
+    q.options.forEach(opt => {
+        const d = document.createElement("div");
+        d.className = "option";
+        d.innerText = opt;
+        d.onclick = () => checkAnswer(opt, q.answer);
+        optBox.appendChild(d);
     });
 
     document.getElementById("popup").style.display = "flex";
 }
 
-function checkAnswer(selected, correct) {
-    if (selected === correct) {
-        alert("✅ Correct Answer!");
-    } else {
-        alert("❌ Wrong Answer!");
-    }
+function checkAnswer(sel, ans) {
+    alert(sel === ans ? "✅ Correct!" : "❌ Wrong!");
 }
 
 function closeQuiz() {
